@@ -7,6 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js"
   },
-  "author": "",
+  "author": "renejpolo@me.com",
   "license": "ISC"
 }
