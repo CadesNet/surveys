@@ -1,16 +1,37 @@
-var express = require('express');
-var app = express();
-var path = require('path');
+( function () {
+	"use strict";
 
-var port = process.env.PORT || 3000;
+	var bodyParser = require('body-parser');
+	var express = require('express');
 
+	var app = express();
 
-app.use(express.static(path.join(__dirname, '/public')));
+	app.use( bodyParser.json() );       // to support JSON-encoded bodies
+	/*app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+		extended: true
+	}));*/
 
-app.get('/*', function(req, res){
-	res.send('hola mundo');
-})
+	//var path = require('path');
+	var port = process.env.PORT || 3000;
 
-app.listen( port, function(){
-	console.log('conectado en ', port);
-});
+	//models
+	var models = require("./models"); 
+
+	//routes
+	var routes = require("./routes"); 
+
+	//static route for forntend application
+	app.use("/", express.static(__dirname + '/../public/'));
+
+	//routes
+	app.use('/surveys', routes.surveys);
+	app.use('/locations', routes.locations);
+
+	models.sequelize.sync().then(function() {
+		app.listen(port, function() {
+			console.log('Express server listening on port ' + port);
+		});
+	});
+
+} )();
+

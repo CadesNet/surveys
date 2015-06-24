@@ -1,0 +1,51 @@
+<form name="surveyForm" class="form-horizontal" novalidate>
+	<fieldset>
+		<legend>Datos de encuesta</legend>
+	    <div class="form-group" ng-class="{'has-error':surveyForm.inputSurveyName.$invalid  && surveyForm.inputSurveyName.$dirty}">
+    		<label for="inputSurveyName" class="col-sm-2 control-label">Nombre</label>
+    		<div class="col-sm-6">
+      			<input type="text" name="inputSurveyName" id="inputSurveyName" placeholder="Nombre de la encuesta(Requerido)" ng-model="vm.survey.name" class="form-control" required>
+    		</div>
+	        <span class="help-block has-error" ng-show="surveyForm.inputSurveyName.$invalid">
+	        	El nombre es requerido
+	        </span>
+  		</div>
+  		<div class="form-group" ng-class="{'has-error':surveyForm.inputSurveyTitle.$invalid  && surveyForm.inputSurveyTitle.$dirty}">
+    		<label for="inputSurveyTitle" class="col-sm-2 control-label">Encabezado</label>
+    		<div class="col-sm-6">
+      			<input type="text" name="inputSurveyTitle" id="inputSurveyTitle" placeholder="Encabezado (Requerido)" ng-model="vm.survey.title" class="form-control" required>
+    		</div>
+	        <span class="help-block has-error" ng-show="surveyForm.inputSurveyTitle.$invalid">
+	        	El titulo o encabezado de la encuesta es requerido
+	        </span>
+  		</div>
+  		<div class="form-group" ng-class="{'has-error':surveyForm.inputSurveyDescription.$invalid  && surveyForm.inputSurveyDescription.$dirty}">
+    		<label for="inputSurveyDescription" class="col-sm-2 control-label">Descripción</label>
+    		<div class="col-sm-6">
+    			<textarea name="inputSurveyDescription" id="inputSurveyDescription" placeholder="Descipción...(Requerido)" rows="3" ng-model="vm.survey.description" class="form-control" required></textarea>
+    		</div>
+	        <span class="help-block has-error" ng-show="surveyForm.inputSurveyDescription.$invalid">
+	        	La descripcion es requerida
+	        </span>
+  		</div>
+  		<div class="form-group">
+    		<div class="col-md-6 col-md-offset-2">
+    			<span>
+    				<button class="btn btn-danger" ng-click="vm.cancel()">
+    					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Volver
+    				</button>
+    			</span>
+    			<span>
+    				<button class="btn btn-primary" ng-click="vm.submit()" ng-disabled="surveyForm.$invalid" >
+    					Guardar
+    				</button>
+    			</span>
+    			<span>
+    				<button class="btn btn-success" ng-click="vm.submit(true)" ng-disabled="surveyForm.$invalid" >
+    					Guardar y continuar <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    				</button>
+    			</span>
+    		</div>
+  		</div>
+	</fieldset>
+</form>

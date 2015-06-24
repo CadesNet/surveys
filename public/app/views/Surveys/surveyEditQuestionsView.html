@@ -1,0 +1,76 @@
+<form name="questionsForm" class="form-horizontal" novalidate>
+	<fieldset>
+		<legend>Preguntas</legend>
+		<div class="form-group"  ng-repeat="question in vm.questions" >
+            <label for="inputQuestionName{{question.id}}" class="col-sm-1 control-label">Pregunta</label>
+    		<div class="col-sm-6" ng-class="{'has-error':
+                                            questionsForm.inputQuestionName{{question.id}}.$invalid && questionsForm.inputQuestionName{{question.id}}.$dirty}">
+      			<textarea name="inputQuestionName{{question.id}}" id="inputQuestionName{{question.id}}" placeholder="Pregunta(Requerido)" ng-model="question.question" class="form-control" required rows='3'> </textarea>
+		        <span class="help-block has-error" ng-show="questionsForm.inputQuestionName{{question.id}}.$invalid">
+		        	El enunciado es requerido
+		        </span>
+    		</div>
+    		<div class="col-sm-2">
+                <span ng-class="{'has-error':
+                                                questionsForm.inputQuestionType{{question.id}}.$invalid && questionsForm.inputQuestionType{{question.id}}.$dirty}">
+                    <select name="inputQuestionType{{question.id}}" id="inputQuestionType{{question.id}}" ng-model="question.type" class="form-control" ng-options="option.id as option.type for option in vm.questionsTypes">
+                    </select>
+                </span>
+                <span ng-class="{'has-error':
+                                                questionsForm.inputQuestionNumberOptions{{question.id}}.$invalid && questionsForm.inputQuestionNumberOptions{{question.id}}.$dirty}">
+                    <input name="inputQuestionNumberOptions{{question.id}}" id="inputQuestionNumberOptions{{question.id}}" type="number" class="form-control" ng-model="question.number_of_options" min="1" max="5" >
+                </span>
+    		</div>
+            <div class="col-sm-2">
+                <button class="btn btn-danger" ng-click="" >
+                    Quitar
+                </button>
+            </div>
+  		</div>
+	    <div class="form-group" >
+    		<div ng-class="{'has-error':questionsForm.inputNewQuestion.$invalid  && questionsForm.inputNewQuestion.$dirty}">
+                <label for="inputNewQuestion" class="col-sm-1 control-label">Agregar pregunta</label>
+                <div class="col-sm-6">
+                    <textarea name="inputNewQuestion" id="inputNewQuestion" placeholder="Enunciado (Requerido)" ng-model="vm.newQuestion.question" class="form-control" required rows="3"></textarea>
+                    <span class="help-block has-error" ng-show="questionsForm.inputNewQuestion.$invalid">
+                        El enunciado es requerido
+                    </span>
+                </div>
+            </div>
+            
+            <div class="col-sm-2">
+                <span ng-class="{'has-error':questionsForm.inputNewQuestionType.$invalid  && questionsForm.inputNewQuestionType.$dirty}">
+                    <select ng-model="vm.newQuestion.type" class="form-control" ng-options="option.id as option.type for option in vm.questionsTypes" required name="inputNewQuestionType" id="inputNewQuestionType">
+                    </select>                    
+                </span>
+                <span ng-class="{'has-error':questionsForm.inputNewQuestionNumberOptions.$invalid  && questionsForm.inputNewQuestionNumberOptions.$dirty}">
+                    <input type="number" class="form-control has-error" ng-model="vm.newQuestion.number_of_options" required min="1" max="5" name="inputNewQuestionNumberOptions" id="inputNewQuestionNumberOptions">
+                </span>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-primary" ng-click="vm.addQuestion(vm.newQuestion)" ng-disabled="questionsForm.$invalid" >
+                    Agregar
+                </button>
+            </div>
+  		</div>
+  		<div class="form-group">
+    		<div class="col-md-6 col-md-offset-2">
+    			<span>
+    				<button class="btn btn-default" ng-click="vm.toInfo()">
+    					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Volver
+    				</button>
+    			</span>
+    			<span>
+    				<button class="btn btn-primary" ng-click="vm.submit()" ng-disabled="questionsForm.$invalid" >
+    					Guardar
+    				</button>
+    			</span>
+    			<span>
+    				<button class="btn btn-success" ng-click="vm.submit(true)" ng-disabled="questionsForm.$invalid" >
+    					Guardar y continuar <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    				</button>
+    			</span>
+    		</div>
+  		</div>
+	</fieldset>
+</form>

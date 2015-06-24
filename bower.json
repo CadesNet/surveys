@@ -1,0 +1,29 @@
+{
+  "name": "surveys",
+  "version": "0.0.0",
+  "homepage": "https://github.com/CadesNet/surveys",
+  "authors": [
+    "RENE GUMIEL <rafokyo@yahoo.es>"
+  ],
+  "description": "Surveys for Ucatec",
+  "keywords": [
+    "Surveys",
+    "forms"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5",
+    "normalize.css": "~3.0.3",
+    "angular-resource": "~1.4.1",
+    "toastr": "~2.1.1"
+  }
+}
