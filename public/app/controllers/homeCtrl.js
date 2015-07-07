@@ -8,7 +8,7 @@
 	function HomeCtrl (surveyResource) {
 		var vm = this;
 
-		surveyResource.query(function (data) {
+		surveyResource.Surveys.query(function (data) {
             vm.surveys = data;
         });
 	}

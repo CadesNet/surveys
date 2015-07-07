@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false,
     },
-    value: {
+    question_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
     },
@@ -17,10 +17,19 @@ module.exports = function(sequelize, DataTypes) {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
+    }
+  },
+  {
+    classMethods:{
+      associate:function(models){
+        this.belongsTo(models.questions, { foreignKey:'question_id'} );
+      }
     }
   });
 };

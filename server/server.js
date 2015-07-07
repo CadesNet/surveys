@@ -25,7 +25,8 @@
 
 	//routes
 	app.use('/surveys', routes.surveys);
-	app.use('/locations', routes.locations);
+	app.use('/questions', routes.questions);
+	app.use('/options', routes.options);
 
 	models.sequelize.sync().then(function() {
 		app.listen(port, function() {

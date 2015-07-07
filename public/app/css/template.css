@@ -2,3 +2,30 @@ body, .row{
 	margin-right: 0px;
 	margin-left: 0px;
 }
+.content-question{
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+	border-bottom: 2px solid #c0c0c0;
+}
+
+.content-question div{
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.title-survey-questions{
+	margin-bottom: 20px;
+	border-bottom: 5px solid #c0c0c0;
+	padding-bottom: 15px;
+}
+
+.title-survey-questions h3{
+	text-align: center;
+	padding: 0px;
+	margin-top: 0px;
+}
+
+.div-actions{
+	text-align: center;
+}

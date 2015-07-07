@@ -22,6 +22,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false,
     },
+    order: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+    },
     value: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -45,6 +49,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods:{
       associate:function(models){
         this.belongsTo(models.surveys, { foreignKey:'survey_id'} );
+        this.hasMany(models.options, { foreignKey: 'question_id'} );
       }
     }
   });

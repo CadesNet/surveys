@@ -26,7 +26,7 @@
                 resolve : {
                     surveyResource : "surveyResource",
                     survey : function (surveyResource, $stateParams) {
-                        return surveyResource.get({
+                        return surveyResource.Surveys.get({
                             id : $stateParams.id
                         }).$promise;
                     }
@@ -40,7 +40,7 @@
                 resolve : {
                     surveyResource : "surveyResource",
                     survey : function (surveyResource, $stateParams) {
-                        return surveyResource.get({
+                        return surveyResource.Surveys.get({
                             id : $stateParams.id
                         }).$promise;
                     }

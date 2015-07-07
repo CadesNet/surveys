@@ -1,76 +1,183 @@
-<form name="questionsForm" class="form-horizontal" novalidate>
-	<fieldset>
-		<legend>Preguntas</legend>
-		<div class="form-group"  ng-repeat="question in vm.questions" >
-            <label for="inputQuestionName{{question.id}}" class="col-sm-1 control-label">Pregunta</label>
-    		<div class="col-sm-6" ng-class="{'has-error':
-                                            questionsForm.inputQuestionName{{question.id}}.$invalid && questionsForm.inputQuestionName{{question.id}}.$dirty}">
-      			<textarea name="inputQuestionName{{question.id}}" id="inputQuestionName{{question.id}}" placeholder="Pregunta(Requerido)" ng-model="question.question" class="form-control" required rows='3'> </textarea>
-		        <span class="help-block has-error" ng-show="questionsForm.inputQuestionName{{question.id}}.$invalid">
-		        	El enunciado es requerido
-		        </span>
-    		</div>
-    		<div class="col-sm-2">
-                <span ng-class="{'has-error':
-                                                questionsForm.inputQuestionType{{question.id}}.$invalid && questionsForm.inputQuestionType{{question.id}}.$dirty}">
-                    <select name="inputQuestionType{{question.id}}" id="inputQuestionType{{question.id}}" ng-model="question.type" class="form-control" ng-options="option.id as option.type for option in vm.questionsTypes">
-                    </select>
-                </span>
-                <span ng-class="{'has-error':
-                                                questionsForm.inputQuestionNumberOptions{{question.id}}.$invalid && questionsForm.inputQuestionNumberOptions{{question.id}}.$dirty}">
-                    <input name="inputQuestionNumberOptions{{question.id}}" id="inputQuestionNumberOptions{{question.id}}" type="number" class="form-control" ng-model="question.number_of_options" min="1" max="5" >
-                </span>
-    		</div>
-            <div class="col-sm-2">
-                <button class="btn btn-danger" ng-click="" >
-                    Quitar
-                </button>
-            </div>
-  		</div>
-	    <div class="form-group" >
-    		<div ng-class="{'has-error':questionsForm.inputNewQuestion.$invalid  && questionsForm.inputNewQuestion.$dirty}">
-                <label for="inputNewQuestion" class="col-sm-1 control-label">Agregar pregunta</label>
-                <div class="col-sm-6">
-                    <textarea name="inputNewQuestion" id="inputNewQuestion" placeholder="Enunciado (Requerido)" ng-model="vm.newQuestion.question" class="form-control" required rows="3"></textarea>
-                    <span class="help-block has-error" ng-show="questionsForm.inputNewQuestion.$invalid">
+<div class="row title-survey-questions">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+        <button class="btn btn-default" ng-click="vm.toInfo()">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Volver
+        </button>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+        <h3>Preguntas</h3>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 text-right">
+        <button class="btn btn-info" ng-click="vm.scrollTo('#div-content-new-question')">
+            Agregar Pregunta <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+        </button>
+    </div>
+</div>
+<div class="row content-question" ng-repeat="question in vm.questions">
+    <form name="questionsForm{{question.id}}" id="questionsForm{{question.id}}" class="form-horizontal"  novalidate>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12" >
+                <div class="row" ng-class="{'has-error':
+                                    questionsForm{{question.id}}.inputQuestionName{{question.id}}.$invalid && questionsForm{{question.id}}.inputQuestionName{{question.id}}.$dirty}">
+                <label for="inputQuestionName{{question.id}}" class="control-label text-right">Pregunta N° {{vm.getNumberItem(vm.questions, question)}}</label>
+                    <textarea name="inputQuestionName{{question.id}}" id="inputQuestionName{{question.id}}" placeholder="Pregunta(Requerido)" ng-model="question.question" class="form-control" required rows='3'> </textarea>
+                    <span class="help-block has-error" ng-show="questionsForm{{question.id}}.inputQuestionName{{question.id}}.$invalid">
                         El enunciado es requerido
+                    </span>                
+                    
+                </div>
+                <div class="row">
+                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-class="{'has-error':
+                                                questionsForm{{question.id}}.inputQuestionAlias{{question.id}}.$invalid && questionsForm{{question.id}}.inputQuestionAlias{{question.id}}.$dirty}">
+                        <label for="inputQuestionAlias{{question.id}}" class="control-label">Alias</label>
+                        <input type="text" name="inputQuestionAlias{{question.id}}" id="inputQuestionAlias{{question.id}}" class="form-control" placeholder="Alias" ng-model="question.alias" required>
+                        <span class="help-block has-error" ng-show="questionsForm{{question.id}}.inputQuestionAlias{{question.id}}.$invalid">
+                            El alias es requerido
+                        </span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-class="{'has-error':
+                                                    questionsForm{{question.id}}.inputQuestionValue{{question.id}}.$invalid &&questionsForm{{question.id}}.inputQuestionValue{{question.id}}.$dirty}">
+                        <label for="inputQuestionValue{{question.id}}" class="control-label">Ponderación</label>
+                        <input type="number" name="inputQuestionValue{{question.id}}" id="inputQuestionValue{{question.id}}" class="form-control" ng-model="question.value" required min="1" max="5">
+                        <span class="help-block has-error" ng-show="questionsForm{{question.id}}.inputQuestionValue{{question.id}}.$invalid">
+                            Debe ser un valor numerico entre 1 y 5
+                        </span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <label for="inputQuestionType{{question.id}}" class="control-label">Tipo</label>
+                        <span ng-class="{'has-error':
+                                        questionsForm{{question.id}}.inputQuestionType{{question.id}}.$invalid && questionsForm{{question.id}}.inputQuestionType{{question.id}}.$dirty}">
+                            <select name="inputQuestionType{{question.id}}" id="inputQuestionType{{question.id}}" ng-model="question.type" class="form-control" ng-options="option.id as option.type for option in vm.questionsTypes">
+                            </select>
+                        </span>
+                        <span class="help-block has-error" ng-show="questionsForm{{question.id}}.inputQuestionType{{question.id}}.$invalid">
+                            Por favor selecciona una de estas opciones
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="question.type!='3'">
+                <div class="row">
+                    <label for="inputQuestionAddOptions{{question.id}}" class="control-label">Agregar Opciones</label>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="Agregar opción" name="inputQuestionAddOptions{{question.id}}" id="inputQuestionAddOptions{{question.id}}" ng-keyup="$event.keyCode == 13 && vm.addOptionOnQuestion(question.newOption, question); $event.preventDefault();" ng-keypress="$event.keyCode == 13 && $event.preventDefault();" ng-keydown="$event.keyCode == 13 && $event.preventDefault();" ng-model="question.newOption">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="vm.addOptionOnQuestion(question.newOption, question);"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <h5>Opciones:</h5>
+                    <div class="input-group input-group-sm" ng-repeat="option in question.options">
+                        <input type="text" class="form-control" name="inputQuestion{{question.id}}Option{{option.id}}" id="inputQuestion{{question.id}}Option{{option.id}}" ng-model="option.option" ng-keyup="$event.keyCode == 13 && vm.saveOption(option); $event.preventDefault();" ng-keypress="$event.keyCode == 13 && $event.preventDefault();" ng-keydown="$event.keyCode == 13 && $event.preventDefault();">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button">
+                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true" ng-click="vm.deleteOption(option, question)"></span>
+                            </button>
+                            <button class="btn btn-success" type="button">
+                                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true" ng-click="vm.saveOption(option)"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 div-actions">
+                <div class="row">
+                    <label class="control-label">Acciones</label>
+                </div>
+                <div class="row">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button class="btn btn-danger btn-sm" ng-click="vm.deleteQuestion(question)" >
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                        <button class="btn btn-success btn-sm" ng-click="vm.saveQuestion(question)" ng-disabled="questionsForm{{question.id}}.$invalid">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true" ></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </form>
+</div>
+
+<div class="row" id="div-content-new-question">
+    <form name="newQuestionsForm" class="form-horizontal" novalidate>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12" >
+                <div class="row" ng-class="{'has-error':
+                                    newQuestionsForm.inputNewQuestion.$invalid && newQuestionsForm.inputNewQuestion.$dirty}">
+                    <label for="inputNewQuestion" class="control-label text-right">Pregunta Nueva</label>
+                    <textarea name="inputNewQuestion" id="inputNewQuestion" placeholder="Pregunta(Requerido)" ng-model="vm.newQuestion.question" class="form-control" required rows='3'> </textarea>
+                    <span class="help-block has-error" ng-show="newQuestionsForm.inputNewQuestion.$invalid">
+                        El enunciado es requerido
+                    </span>                
+                    
+                </div>
+                <div class="row">
+                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-class="{'has-error':
+                                    newQuestionsForm.inputNewAlias.$invalid && newQuestionsForm.inputNewAlias.$dirty}">
+                        <label for="inputNewAlias" class="control-label">Alias</label>
+                        <input type="text" name="inputNewAlias" id="inputNewAlias" class="form-control" placeholder="Alias" ng-model="vm.newQuestion.alias" required>
+                        <span class="help-block has-error" ng-show="newQuestionsForm.inputNewAlias.$invalid">
+                            El alias es requerido
+                        </span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-class="{'has-error':
+                                    newQuestionsForm.inputNewValue.$invalid && newQuestionsForm.inputNewValue.$dirty}">
+                        <label for="inputNewValue" class="control-label">Ponderación</label>
+                        <input type="number" name="inputNewValue" id="inputNewValue" class="form-control" ng-model="vm.newQuestion.value" required min="1" max="5">
+                        <span class="help-block has-error" ng-show="newQuestionsForm.inputNewValue.$invalid">
+                            Debe ser un valor numerico entre 1 y 5
+                        </span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <label for="inputNewType" class="control-label">Tipo</label>
+                        <span ng-class="{'has-error':
+                                        newQuestionsForm.inputNewType.$invalid && newQuestionsForm.inputNewType.$dirty}">
+                            <select name="inputNewType" id="inputNewType" ng-model="vm.newQuestion.type" class="form-control" ng-options="option.id as option.type for option in vm.questionsTypes" ng-change="vm.changeNewQuestionType(vm.newQuestion.type)">
+                            </select>
+                        </span>
+                        <span class="help-block has-error" ng-show="newQuestionsForm.inputNewType.$invalid">
+                            Por favor selecciona una de estas opciones
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="vm.showInputNewQuesionOptions">
+                <div class="row">
+                    <label for="inputNewQuestionAddOptions" class="control-label">Agregar Opciones</label>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="Agregar opción" name="inputNewQuestionAddOptions" id="inputNewQuestionAddOptions" ng-model="vm.option" class="input-questions-options" ng-keyup="$event.keyCode == 13 && vm.addOptionToNewQuestion(vm.option); $event.preventDefault();" ng-keypress="$event.keyCode == 13 && $event.preventDefault();" ng-keydown="$event.keyCode == 13 && $event.preventDefault();" >
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" ng-click="vm.addOptionToNewQuestion(vm.option)">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <span ng-repeat="option in vm.newQuestion.options">
+                        <button class="btn btn-link btn-md" type="button" ng-click="vm.deleteItemOfArray(vm.newQuestion.options, option)">
+                            {{option}} <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
                     </span>
                 </div>
             </div>
-            
-            <div class="col-sm-2">
-                <span ng-class="{'has-error':questionsForm.inputNewQuestionType.$invalid  && questionsForm.inputNewQuestionType.$dirty}">
-                    <select ng-model="vm.newQuestion.type" class="form-control" ng-options="option.id as option.type for option in vm.questionsTypes" required name="inputNewQuestionType" id="inputNewQuestionType">
-                    </select>                    
-                </span>
-                <span ng-class="{'has-error':questionsForm.inputNewQuestionNumberOptions.$invalid  && questionsForm.inputNewQuestionNumberOptions.$dirty}">
-                    <input type="number" class="form-control has-error" ng-model="vm.newQuestion.number_of_options" required min="1" max="5" name="inputNewQuestionNumberOptions" id="inputNewQuestionNumberOptions">
-                </span>
+            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 div-actions">
+                <div class="row">
+                    <label class="control-label">Acciones</label>
+                </div>
+                <div class="row">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button class="btn btn-success btn-sm" ng-click="vm.saveQuestion(vm.newQuestion)" ng-disabled="newQuestionsForm.$invalid">
+                            Agregar &nbsp;
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ></span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-2">
-                <button class="btn btn-primary" ng-click="vm.addQuestion(vm.newQuestion)" ng-disabled="questionsForm.$invalid" >
-                    Agregar
-                </button>
-            </div>
-  		</div>
-  		<div class="form-group">
-    		<div class="col-md-6 col-md-offset-2">
-    			<span>
-    				<button class="btn btn-default" ng-click="vm.toInfo()">
-    					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Volver
-    				</button>
-    			</span>
-    			<span>
-    				<button class="btn btn-primary" ng-click="vm.submit()" ng-disabled="questionsForm.$invalid" >
-    					Guardar
-    				</button>
-    			</span>
-    			<span>
-    				<button class="btn btn-success" ng-click="vm.submit(true)" ng-disabled="questionsForm.$invalid" >
-    					Guardar y continuar <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    				</button>
-    			</span>
-    		</div>
-  		</div>
-	</fieldset>
-</form>
+        </div>
+    </form>
+</div>

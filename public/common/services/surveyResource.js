@@ -6,7 +6,11 @@
 		.factory( 'surveyResource', ['$resource', surveyResource ] );
 
 	function surveyResource ($resource) {
-		return $resource("/surveys/:id");
+		return {
+			Surveys : $resource("/surveys/:id"),
+			Questions : $resource("/questions/:id"),
+			Options : $resource("/options/:id")
+		}
 	}
 
 

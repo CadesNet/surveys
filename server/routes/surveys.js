@@ -23,7 +23,6 @@
 			}
 		})
 		.post(parseUrlencoded, function (req, res) {
-			console.log(req.body);
 			if (/^([0-9])*$/.test(req.body.id) && req.body.id>0) {
 	            models.surveys.find({ where: {id: req.body.id} })
 	            .then(function(survey) {
@@ -47,8 +46,10 @@
 	                description : req.body.description,
 	                state : req.body.state,
 	                code : req.body.code
-	            }).then(function(survey){
-	                res.json(survey.dataValues);
+	            }).then(function(){
+	                models.surveys.findOne({ order : 'updatedAt DESC' }).then(function (survey) {
+	                	res.json(survey);
+	                });
 	            }).catch(function(error){
 	                console.log("ops: " + error);
 	                res.status(500).json({ error: 'error' });
@@ -74,7 +75,7 @@
             		res.json(survey);
             	} else {
             		if (req.forNew) {
-	            		var survey = {"id" : req.surveyId, "state" : '1'};
+	            		var survey = {"id" : req.surveyId, "state" : '1', 'code' : '0'};
 	            		res.json(survey);
             		} else {
             			res.status(404).json('No survey found for '+req.params.id);	
