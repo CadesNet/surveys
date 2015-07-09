@@ -1,2 +1,23 @@
-<h1>Estas en survey</h1>
-<p>El titulo de esta survey es: {{vm.survey.title}}</p>
+<h1>{{vm.survey.title}}</h1>
+<p>{{vm.survey.description}}</p>
+<div class="row">
+	<div class="row content-question-front" ng-repeat="question in vm.questions">
+		<p>{{question.question}}</p>
+		<div ng-if="question.type=='1'" >
+			<label class="label-options col-lg-2 text-capitalize" ng-repeat="option in question.options">
+                <input type="radio" ng-value="option.id" ng-model="question.answer" />
+                {{option.option}}
+            </label>
+		</div>
+		<div ng-if="question.type=='2'">
+			<label class="label-options col-lg-2 text-capitalize" ng-repeat="option in question.options">
+			  <input type="checkbox" name="question.answer[]" value="{{option.id}}" ng-checked="selection.indexOf(fruitName) >-1"
+			    ng-click="toggleSelection(fruitName)"
+			  > {{option.option}}
+			</label>
+		</div>
+		<div ng-if="question.type=='3'">
+			<textarea name="" id="" class="form-control" rows="4"></textarea>
+		</div>
+	</div>
+</div>

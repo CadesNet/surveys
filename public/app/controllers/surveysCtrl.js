@@ -19,6 +19,7 @@
 	        {'id' : '2', 'type': 'Multiple'},
 	        {'id' : '3', 'type': 'Complementacion'}
 	    ];
+	    vm.answers = [];
 		
 		if (vm.survey && vm.survey.id) {
 			vm.title = "Editar : "+vm.survey.title;
