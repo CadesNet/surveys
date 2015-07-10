@@ -62,8 +62,8 @@
                     <div class="input-group input-group-sm">
                         <input type="text" class="form-control" placeholder="Agregar opción" name="inputQuestionAddOptions{{question.id}}" id="inputQuestionAddOptions{{question.id}}" ng-keyup="$event.keyCode == 13 && vm.addOptionOnQuestion(question.newOption, question); $event.preventDefault();" ng-keypress="$event.keyCode == 13 && $event.preventDefault();" ng-keydown="$event.keyCode == 13 && $event.preventDefault();" ng-model="question.newOption">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="vm.addOptionOnQuestion(question.newOption, question);"></span>
+                            <button class="btn btn-primary" type="button" ng-click="vm.addOptionOnQuestion(question.newOption, question);">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
                             </button>
                         </span>
                     </div>
@@ -73,11 +73,11 @@
                     <div class="input-group input-group-sm" ng-repeat="option in question.options">
                         <input type="text" class="form-control" name="inputQuestion{{question.id}}Option{{option.id}}" id="inputQuestion{{question.id}}Option{{option.id}}" ng-model="option.option" ng-keyup="$event.keyCode == 13 && vm.saveOption(option); $event.preventDefault();" ng-keypress="$event.keyCode == 13 && $event.preventDefault();" ng-keydown="$event.keyCode == 13 && $event.preventDefault();">
                         <span class="input-group-btn">
-                            <button class="btn btn-danger" type="button">
-                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true" ng-click="vm.deleteOption(option, question)"></span>
+                            <button class="btn btn-danger" type="button" ng-click="vm.deleteOption(option, question)">
+                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true" ></span>
                             </button>
-                            <button class="btn btn-success" type="button">
-                                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true" ng-click="vm.saveOption(option)"></span>
+                            <button class="btn btn-success" type="button" ng-click="vm.saveOption(option)">
+                                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true" ></span>
                             </button>
                         </span>
                     </div>

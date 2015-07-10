@@ -11,6 +11,14 @@
 		extended: true
 	}));*/
 
+	//Function for no Cache (internet explorer)
+	app.use(function noCache(req, res, next){
+	    res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+	    res.header("Pragma", "no-cache");
+	    res.header("Expires",0);
+	    next();
+	});
+
 	//var path = require('path');
 	var port = process.env.PORT || 3000;
 
