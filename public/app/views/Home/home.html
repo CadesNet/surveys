@@ -4,7 +4,7 @@
 	<div class="row row-product-list" ng-repeat="survey in vm.surveys">
 		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">{{survey.title}}</div>
 		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">{{survey.description}}</div>
-		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-6"><a ui-sref="surveySelect({id: survey.id})">Ver</a> </div>
-		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-6"><a ui-sref="surveyEdit.info({id: survey.id})">Editar</a> </div>
+		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-6"><a class="btn btn-primary btn-flat" ui-sref="surveySelect({id: survey.id})">Ver</a> </div>
+		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-6"><a class="btn btn-primary btn-flat" ui-sref="surveyEdit.info({id: survey.id})">Editar</a> </div>
 	</div>
 </div>

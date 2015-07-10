@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/normalize.css/normalize.css">
     <link rel="stylesheet" href="libs/toastr/toastr.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-material-design/dist/css/roboto.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-material-design/dist/css/material.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-material-design/dist/css/ripples.min.css">
     <link rel="stylesheet" href="app/css/template.css">
 
 	<!--External Libraries -->
@@ -17,6 +20,8 @@
     <script src="libs/angular-resource/angular-resource.min.js"></script>
     <script src="libs/toastr/toastr.min.js"></script>
     <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="libs/bootstrap-material-design/dist/js/ripples.min.js"></script>
+    <script src="libs/bootstrap-material-design/dist/js/material.min.js"></script>
 
 	<!--Application Script-->
     <script src="app/app.js"></script>
@@ -62,5 +67,10 @@
     <footer>
     	
     </footer>
+    <script>
+        $(document).ready(function() {
+            $.material.init();
+        });
+    </script>
 </body>
 </html>

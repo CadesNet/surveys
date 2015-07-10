@@ -24,6 +24,7 @@
     "bootstrap": "~3.3.5",
     "normalize.css": "~3.0.3",
     "angular-resource": "~1.4.1",
-    "toastr": "~2.1.1"
+    "toastr": "~2.1.1",
+    "bootstrap-material-design": "~0.3.0"
   }
 }

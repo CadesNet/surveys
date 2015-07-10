@@ -47,3 +47,14 @@ body, .row{
   	border-bottom: 1px solid #C5C5C5;
   	padding-bottom: 15px;
 }
+
+textarea.textarea-border {
+	border-top: 1px solid #CDCDCD;
+	border-right: 1px solid #CDCDCD;
+	border-left: 1px solid #CDCDCD;
+}
+.btn-options-temp{
+	padding: 5px;
+	color: #009688;
+
+}
