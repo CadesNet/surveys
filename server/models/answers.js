@@ -25,10 +25,19 @@ module.exports = function(sequelize, DataTypes) {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW
     },
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW
+    }
+  },
+  {
+    classMethods:{
+      associate:function(models){
+        this.belongsTo(models.answers_details, { foreignKey:'answers_details_id'} );
+      }
     }
   });
 };

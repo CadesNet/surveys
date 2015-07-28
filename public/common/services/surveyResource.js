@@ -9,7 +9,8 @@
 		return {
 			Surveys : $resource("/surveys/:id"),
 			Questions : $resource("/questions/:id"),
-			Options : $resource("/options/:id")
+			Options : $resource("/options/:id"),
+			Answers : $resource("/answers/:id")
 		}
 	}
 

@@ -11,6 +11,7 @@
 						<th>Descripción</th>
 						<th></th>
 						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -18,10 +19,13 @@
 						<td>{{survey.title}}</td>
 						<td>{{survey.description}}</td>
 						<td>
-							<a class="btn btn-primary btn-flat" ui-sref="surveySelect({id: survey.id})">Ver</a> 
+							<a class="btn btn-primary btn-flat" ui-sref="surveySelect({id: survey.id})">Llenar</a> 
 						</td>
 						<td>
 							<a class="btn btn-primary btn-flat" ui-sref="surveyEdit.info({id: survey.id})">Editar</a>
+						</td>
+						<td>
+							<a class="btn btn-primary btn-flat" ui-sref="surveyResults({id: survey.id})">Ver Resultados</a>
 						</td>
 					</tr>
 				</tbody>

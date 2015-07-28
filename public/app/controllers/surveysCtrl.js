@@ -19,7 +19,6 @@
 	        {'id' : '2', 'type': 'Multiple'},
 	        {'id' : '3', 'type': 'Complementacion'}
 	    ];
-	    vm.answers = [];
 		
 		if (vm.survey && vm.survey.id) {
 			vm.title = "Editar : "+vm.survey.title;
@@ -32,6 +31,7 @@
 		if(vm.survey.questions) {
 			vm.questions = [] ;
 			loadQuestionsOnlist();
+			loadAnswerslist();
 		} else {
 			vm.questions = [] ;
 		}
@@ -42,6 +42,23 @@
                     id : question.id
                 }));
 			});
+	    }
+
+	    function loadAnswerslist () {
+	    	vm.answers = [];
+	    	if(vm.questions.length > 0) {
+	    		vm.questions.forEach(function (question) {
+					vm.answers.push(question);
+	    		});
+	    	}
+	    	vm.answerDetails = {
+		    	teacher : "Docente de prueba",
+		    	matter : "Materia de prueba",
+		    	schedule : "Horario de prueba",
+		    	survey_id : vm.survey.id,
+		    	answers : vm.answers
+		    }
+		    //console.log(vm.answerDetails);
 	    }
 
 		vm.cancel = function () {
@@ -140,7 +157,7 @@
 			} else {
 				vm.showInputNewQuesionOptions = true;
 			}
-			console.log(vm.showInputNewQuesionOptions);
+			//console.log(vm.showInputNewQuesionOptions);
 		}
 
 		vm.deleteItemOfArray =  function (array, option) {
@@ -170,6 +187,19 @@
 				option = '';
 				newOption = {};
 			}
+		}
+
+		vm.selectedOption = function (selected, question) {
+			//console.log(vm.questions);
+		}
+
+		vm.sendAnswers = function () {
+			surveyResource.Answers.save(vm.answerDetails , function (data, getResponseHeaders) {
+					toastr.info("Tus respuestas se registraron correctamente - gracias por colaborar con nosotros");
+				},function(data, getResponseHeaders) { 
+					toastr.error("Ocurrio un error al registrar tus respuestas, por favor intenta nuevamente");
+				});
+			console.log(vm.questions);
 		}
 
 		/*vm.removeQuestion = function (item) {

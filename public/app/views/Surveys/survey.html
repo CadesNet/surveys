@@ -5,27 +5,41 @@
 		</div>
 
 		<div class="panel-body">
-			<h4>{{vm.survey.description}}</h4>
-
-			<div class="row content-question-front" ng-repeat="question in vm.questions">
-				<p>{{question.question}}</p>
-				<div ng-if="question.type=='1'" >
-					<label class="label-options  text-capitalize btn btn-primary btn-flat" ng-repeat="option in question.options">
-		                <input type="radio" ng-value="option.id" ng-model="question.answer" />
-		                {{option.option}}
-		            </label>
+			<form name="surveyFormAnswers" novalidate>
+				<h4>{{vm.survey.description}}</h4>
+				<div class="row content-question-front" ng-repeat="question in vm.questions">
+					<p>{{question.question}}</p>
+					<div ng-if="question.type=='1'" >
+						<label class="label-options  text-capitalize btn btn-primary btn-flat" ng-repeat="option in question.options">
+			                <input name="question{{question.id}}" id="question{{question.id}}" required type="radio" ng-value="option.id" ng-model="question.answer" ng-change="vm.selectedOption(option.id, question)" />
+			                {{option.option}}
+			            </label>
+			            <span class="help-block has-error" ng-show="surveyFormAnswers.question{{question.id}}.$invalid">
+				        	Debe seleccionar una opción
+				        </span>
+					</div>
+					<div ng-if="question.type=='2'">
+						<label class="label-options  text-capitalize btn btn-primary btn-flat" ng-repeat="option in question.options">
+						  <input name="question{{question.id}}" id="question{{question.id}}" type="checkbox" value="{{option.id}}" ng-model="question.answer[option.id]"  ng-change="vm.selectedOption(option.id, question)" ng-required="!question.answer"> 
+						  {{option.option}}
+						</label>
+						<span class="help-block has-error" ng-show="surveyFormAnswers.question{{question.id}}.$invalid">
+				        	Debe seleccionar una opción
+				        </span>
+					</div>
+					<div ng-if="question.type=='3'">
+						<textarea name="question{{question.id}}" id="question{{question.id}}" class="form-control textarea-border" rows="4" ng-model="question.answer" required></textarea>
+						<span class="help-block has-error" ng-show="surveyFormAnswers.question{{question.id}}.$invalid">
+				        	Por favor llene este campo
+				        </span>
+					</div>
 				</div>
-				<div ng-if="question.type=='2'">
-					<label class="label-options  text-capitalize btn btn-primary btn-flat" ng-repeat="option in question.options">
-					  <input type="checkbox" name="question.answer[]" value="{{option.id}}" ng-checked="selection.indexOf(fruitName) >-1"
-					    ng-click="toggleSelection(fruitName)"
-					  > {{option.option}}
-					</label>
+				<div class="row">
+					<button class="btn btn-success" ng-click="surveyFormAnswers.$valid && vm.sendAnswers();" ng-disabled="surveyFormAnswers.$invalid" >
+    					Guardar 
+    				</button>
 				</div>
-				<div ng-if="question.type=='3'">
-					<textarea name="" id="" class="form-control textarea-border" rows="4"></textarea>
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>

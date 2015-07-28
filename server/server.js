@@ -35,6 +35,7 @@
 	app.use('/surveys', routes.surveys);
 	app.use('/questions', routes.questions);
 	app.use('/options', routes.options);
+	app.use('/answers', routes.answers);
 
 	models.sequelize.sync().then(function() {
 		app.listen(port, function() {

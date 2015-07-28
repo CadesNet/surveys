@@ -1,7 +1,7 @@
 ( function () {
 	"use strict";
 
-	var app = angular.module('Surveys', ['ui.router', 'common.services']);
+	var app = angular.module('Surveys', ['ui.router', 'common.services', 'nvd3']);
 
 	app.config(routes);
     app.config(provides);
@@ -54,45 +54,19 @@
                 url : "/questions",
                 templateUrl : "app/views/Surveys/surveyEditQuestionsView.html"
             })
-            /*.state("productDetails", {
-                url : "/productos/:id",
-                templateUrl : "views/productDetailView.html",
-                controller : "ProductCtrl as vm",
+            .state("surveyResults", {
+                url : "/surveys/results/:id",
+                templateUrl : "app/views/Results/surveyResults.html",
+                controller : "ResultsCtrl as vm",
                 resolve : {
-                    productResource : "productResource",
-                    newsOne : function (productResource, $stateParams) {
-                        return productResource.get({
+                    surveyResource : "surveyResource",
+                    survey : function (surveyResource, $stateParams) {
+                        return surveyResource.Surveys.get({
                             id : $stateParams.id
                         }).$promise;
                     }
                 }
             })
-            .state("productEdit", {
-                abstract : true,
-                url : "/productos/edit/:id",
-                templateUrl : "views/productEditView.html",
-                controller : "ProductEditCtrl as vm",
-                resolve : {
-                    productResource : "productResource",
-                    newsOne : function (productResource, $stateParams) {
-                        return productResource.get({
-                            id : $stateParams.id
-                        }).$promise;
-                    }
-                }
-            })
-            .state("productEdit.info", {
-                url : "/info",
-                templateUrl : "views/productEditInfoView.html"
-            })
-            .state("productEdit.link", {
-                url : "/link",
-                templateUrl : "views/productEditLinkView.html"
-            })
-            .state("productEdit.state", {
-                url : "/state",
-                templateUrl : "views/productEditStateView.html"
-            });*/
     }
 
     function provides ($provide) {
